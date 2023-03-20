@@ -1,0 +1,1 @@
+*.ts, *.env, *.json | node_modules/, .vscode/, .git/, .npm/

@@ -1,0 +1,34 @@
+{
+  "name": "aztecas",
+  "version": "1.0.0",
+  "description": "Awesome project developed with TypeORM.",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "@types/node-cron": "^3.0.7",
+    "ts-node": "10.7.0",
+    "typescript": "4.5.2"
+  },
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "mysql": "^2.14.1",
+    "node-cron": "^3.0.2",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.12"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FRFlo/AztecasBot.git"
+  },
+  "author": "FRFlo",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/FRFlo/AztecasBot/issues"
+  },
+  "homepage": "https://github.com/FRFlo/AztecasBot#readme"
+}
