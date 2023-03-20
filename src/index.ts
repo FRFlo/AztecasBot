@@ -57,9 +57,11 @@ for (const file of readdirSync(`${__dirname}/events`).filter(file => file.endsWi
         client.on(event.name, async (...args) => event.execute(...args));
     }
 }
+(async () => {
+    await client.login(config.token);
 
-client.login(config.token);
-client.application.commands.set(cmdlists);
+    client.application.commands.set(cmdlists);
+})();
 
 export { buttons, client, commands, config, db, events, log };
 
