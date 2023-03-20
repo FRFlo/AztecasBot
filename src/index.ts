@@ -31,7 +31,6 @@ let db: DataSource;
     }).initialize()
 })();
 const cmdlists = [];
-const privatecmdlists = [];
 const commands = new Map<string, AZCommand>();
 const buttons = new Map<string, AZButton>();
 const events = new Map<string, AZEvent>();
@@ -41,11 +40,7 @@ function log(...args: any[]) { console.log(`[${new Date().toLocaleString('fr-FR'
 for (const file of readdirSync(`${__dirname}/commands`).filter(file => file.endsWith(".ts"))) {
     const command: AZCommand = require(`${__dirname}/commands/${file}`)
     commands.set(command.data.name, command);
-    if (command.private) {
-        privatecmdlists.push(command.data.toJSON());
-    } else {
-        cmdlists.push(command.data.toJSON());
-    }
+    cmdlists.push(command.data.toJSON());
 }
 
 for (const file of readdirSync(`${__dirname}/buttons`).filter(file => file.endsWith(".ts"))) {
@@ -63,14 +58,8 @@ for (const file of readdirSync(`${__dirname}/events`).filter(file => file.endsWi
     }
 }
 
-(async () => {
-    await client.login(config.token);
-
-    client.application.commands.set(cmdlists);
-    config.beta_servers.forEach(async (guildId) => {
-        await client.guilds.resolve(guildId).commands.set(privatecmdlists);
-    });
-})();
+client.login(config.token);
+client.application.commands.set(cmdlists);
 
 export { buttons, client, commands, config, db, events, log };
 

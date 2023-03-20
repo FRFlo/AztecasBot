@@ -2,7 +2,6 @@ import { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction
 
 export interface AZCommand {
     data: SlashCommandBuilder;
-    private?: boolean;
     autocomplete?(interaction: AutocompleteInteraction);
     execute(interaction: ChatInputCommandInteraction);
 };
