@@ -6,9 +6,9 @@ export class Guild {
     @PrimaryColumn()
     id: string;
 
-    @Column()
-    adminRoles: Role[];
+    @Column({ type: "json" })
+    adminRoles: string[];
 
-    @Column()
-    memberRoles: Role[];
+    @Column({ type: "json" })
+    memberRoles: string[];
 }
