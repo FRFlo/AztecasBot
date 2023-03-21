@@ -3,7 +3,7 @@ import { readdirSync } from "fs";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import * as config from "../configs/config.json";
-import { Guild } from "./classes/database";
+import { Member } from "./classes/database";
 import { AZButton, AZCommand, AZEvent } from "./classes/files";
 
 const client = new Client<true>({
@@ -24,7 +24,7 @@ let db: DataSource;
         database: config.database.database,
         synchronize: true,
         logging: false,
-        entities: [Guild],
+        entities: [Member],
         migrations: [],
         subscribers: [],
         charset: "utf8mb4_general_ci",

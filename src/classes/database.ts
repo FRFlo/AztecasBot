@@ -1,14 +1,16 @@
-import { Role } from "discord.js";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity({ name: "guilds" })
-export class Guild {
+@Entity({ name: "members" })
+export class Member {
     @PrimaryColumn()
     id: string;
 
-    @Column({ type: "json" })
-    adminRoles: string[];
+    @Column()
+    name: string;
 
-    @Column({ type: "json" })
-    memberRoles: string[];
+    @Column()
+    phone: number;
+
+    @Column({ nullable: true })
+    idCard: string;
 }
