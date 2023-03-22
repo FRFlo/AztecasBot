@@ -29,7 +29,7 @@ module.exports = <AZCommand>{
         member.id = interaction.user.id;
         member.name = interaction.options.getString("pseudo", true);
         member.phone = interaction.options.getInteger("numero", true);
-        member.idCard = interaction.options.getAttachment("carte-identite", true).url;
+        member.idCard = interaction.options.getAttachment("carte-identite", false)?.url;
 
         await db.manager.save(member);
 
