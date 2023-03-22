@@ -25,7 +25,7 @@ module.exports = <AZCommand>{
     async execute(interaction: ChatInputCommandInteraction) {
         await interaction.deferReply();
 
-        const member = new Member();
+        const member = await db.manager.findOne(Member, { where: { id: interaction.user.id } }) ?? new Member();
         member.id = interaction.user.id;
         member.name = interaction.options.getString("pseudo", true);
         member.phone = interaction.options.getInteger("numero", true);
