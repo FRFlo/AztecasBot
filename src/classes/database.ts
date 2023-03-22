@@ -9,7 +9,7 @@ export class Member {
     name: string;
 
     @Column()
-    phone: number;
+    phone: string;
 
     @Column({ nullable: true })
     idCard: string;

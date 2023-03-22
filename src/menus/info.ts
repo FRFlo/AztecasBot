@@ -22,7 +22,7 @@ module.exports = {
             .setTitle("Informations")
             .addFields([
                 { name: "Pseudo", value: member.name, inline: true },
-                { name: "Numéro de téléphone", value: String(member.phone), inline: true },
+                { name: "Numéro de téléphone", value: member.phone, inline: true },
             ])
 
         if (config.grades.includes(interaction.guild.members.cache.get(interaction.user.id).roles.highest.id)) embed.setThumbnail(member.idCard);

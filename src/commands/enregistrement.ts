@@ -12,7 +12,7 @@ module.exports = <AZCommand>{
             .setDescription("Votre pseudo dans le gang")
             .setRequired(true)
         )
-        .addIntegerOption(option => option
+        .addStringOption(option => option
             .setName("numero")
             .setDescription("Votre numéro de téléphone")
             .setRequired(true)
@@ -28,7 +28,7 @@ module.exports = <AZCommand>{
         const member = await db.manager.findOne(Member, { where: { id: interaction.user.id } }) ?? new Member();
         member.id = interaction.user.id;
         member.name = interaction.options.getString("pseudo", true);
-        member.phone = interaction.options.getInteger("numero", true);
+        member.phone = interaction.options.getString("numero", true);
         member.idCard = interaction.options.getAttachment("carte-identite", false)?.url;
 
         await db.manager.save(member);
