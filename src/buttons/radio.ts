@@ -1,10 +1,13 @@
 import { ButtonInteraction } from "discord.js";
-import { AZButton } from "../classes/files";
+import { config } from "..";
 import { EmbedResponseSuccess } from "../classes/embed";
+import { AZButton } from "../classes/files";
 
 module.exports = <AZButton>{
     name: "radio",
     async execute(interaction: ButtonInteraction) {
+        if (!config.grades.includes(interaction.guild.members.cache.get(interaction.user.id).roles.highest.id)) return interaction.deferUpdate();
+
         await interaction.deferReply();
 
         const embed = interaction.message.embeds[0]
