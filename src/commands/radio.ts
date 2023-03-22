@@ -39,5 +39,7 @@ module.exports = <AZCommand>{
                 ]
             })
         }
+
+        await interaction.reply({ content: "Radio changée" })
     },
 };
