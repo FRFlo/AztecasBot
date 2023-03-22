@@ -8,9 +8,6 @@ module.exports = <AZCommand>{
         .setName("radio")
         .setDescription("Régénérer la radio"),
     async execute(interaction: ChatInputCommandInteraction) {
-        const date = Date.now();
-        log(`Radio changée à ${date.toLocaleString('fr-FR')}`)
-
         for (const channelId in config.radios) {
             const channel = client.channels.cache.get(config.radios[channelId]) as TextChannel;
 

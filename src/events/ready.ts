@@ -21,8 +21,6 @@ module.exports = <AZEvent>{
         });
 
         cron.schedule("0 17 * * *", (date: Date) => {
-            log(`Radio changée à ${date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}`)
-
             for (const channelId in config.radios) {
                 const channel = client.channels.cache.get(config.radios[channelId]) as TextChannel;
 
