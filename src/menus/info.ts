@@ -25,7 +25,7 @@ module.exports = {
                 { name: "Numéro de téléphone", value: String(member.phone), inline: true },
             ])
 
-        if (config.grades.includes(interaction.guild.members.cache.get(member.id).roles.highest.id)) embed.setThumbnail(member.idCard);
+        if (config.grades.includes(interaction.guild.members.cache.get(interaction.user.id).roles.highest.id)) embed.setThumbnail(member.idCard);
 
         return interaction.editReply({
             embeds: [
