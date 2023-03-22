@@ -1,8 +1,8 @@
 import { ActionRowBuilder, ActivityType, ButtonBuilder, ButtonStyle, Client, TextChannel } from "discord.js";
 import * as cron from "node-cron";
 import { config, log } from "..";
-import { AZEvent } from "../classes/files";
 import { Embed } from "../classes/embed";
+import { AZEvent } from "../classes/files";
 
 module.exports = <AZEvent>{
     name: 'ready',
@@ -21,6 +21,7 @@ module.exports = <AZEvent>{
         });
 
         cron.schedule("0 17 * * *", (date: Date) => {
+            log("Changement de radio")
             for (const channelId in config.radios) {
                 const channel = client.channels.cache.get(config.radios[channelId]) as TextChannel;
 
