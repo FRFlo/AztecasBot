@@ -20,7 +20,7 @@ module.exports = <AZCommand>{
         .addAttachmentOption(option => option
             .setName("carte-identite")
             .setDescription("Votre carte d'identité")
-            .setRequired(true)
+            .setRequired(false)
         ),
     async execute(interaction: ChatInputCommandInteraction) {
         await interaction.deferReply();
