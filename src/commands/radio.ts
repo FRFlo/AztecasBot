@@ -16,6 +16,8 @@ module.exports = <AZCommand>{
                 continue;
             }
 
+            channel.bulkDelete(100, true)
+
             channel.send({
                 content: "@here",
                 embeds: [

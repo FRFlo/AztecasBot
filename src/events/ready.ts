@@ -30,6 +30,8 @@ module.exports = <AZEvent>{
                     continue;
                 }
 
+                channel.bulkDelete(100, true)
+
                 channel.send({
                     content: "@here",
                     embeds: [
