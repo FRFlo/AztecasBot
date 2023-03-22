@@ -49,6 +49,6 @@ module.exports = <AZEvent>{
                     ]
                 })
             }
-        })
+        }, { timezone: "Europe/Paris" })
     },
 };
