@@ -1,11 +1,11 @@
-import { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction } from "discord.js";
-import { buttons, commands } from "..";
+import { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction, ContextMenuCommandInteraction } from "discord.js";
+import { buttons, commands, menus } from "..";
 import { EmbedResponseError } from "../classes/embed";
 import { AZEvent } from "../classes/files";
 
 module.exports = <AZEvent>{
     name: 'interactionCreate',
-    async execute(interaction: ChatInputCommandInteraction | AutocompleteInteraction | ButtonInteraction) {
+    async execute(interaction: ChatInputCommandInteraction | AutocompleteInteraction | ButtonInteraction | ContextMenuCommandInteraction) {
         if (interaction.isChatInputCommand()) {
             const command = commands.get(interaction.commandName);
 
@@ -91,6 +91,31 @@ module.exports = <AZEvent>{
                     embeds: [
                         new EmbedResponseError(interaction.user, {
                             description: "Une erreur est survenue lors de l'exécution du bouton !",
+                        })
+                    ], ephemeral: true
+                });
+            }
+        } else if (interaction.isMessageContextMenuCommand() || interaction.isUserContextMenuCommand()) {
+            const menu = menus.get(interaction.commandName);
+
+            if (!menu) {
+                return await interaction.reply({
+                    embeds: [
+                        new EmbedResponseError(interaction.user, {
+                            description: "Ce menu n'existe pas !",
+                        })
+                    ], ephemeral: true
+                });
+            }
+
+            try {
+                await menu.execute(interaction);
+            } catch (error) {
+                console.error(error);
+                await interaction.reply({
+                    embeds: [
+                        new EmbedResponseError(interaction.user, {
+                            description: "Une erreur est survenue lors de l'exécution du menu !",
                         })
                     ], ephemeral: true
                 });

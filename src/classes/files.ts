@@ -1,4 +1,4 @@
-import { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction, ContextMenuCommandBuilder, ContextMenuCommandInteraction, SlashCommandBuilder } from "discord.js";
 
 export interface AZCommand {
     data: SlashCommandBuilder;
@@ -10,6 +10,11 @@ export interface AZButton {
     name: string;
     execute(interaction: ButtonInteraction);
 };
+
+export interface AZMenu {
+    data: ContextMenuCommandBuilder;
+    execute(interaction: ContextMenuCommandInteraction);
+}
 
 export interface AZEvent {
     name: string;

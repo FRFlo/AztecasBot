@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import * as config from "../configs/config.json";
 import { Member } from "./classes/database";
-import { AZButton, AZCommand, AZEvent } from "./classes/files";
+import { AZButton, AZCommand, AZEvent, AZMenu } from "./classes/files";
 
 const client = new Client<true>({
     intents: [
@@ -33,14 +33,22 @@ let db: DataSource;
 const cmdlists = [];
 const commands = new Map<string, AZCommand>();
 const buttons = new Map<string, AZButton>();
+const menus = new Map<string, AZMenu>();
 const events = new Map<string, AZEvent>();
+const directories = [
+    { dir: "commands", set: commands },
+    { dir: "menus", set: menus },
+];
 
 function log(...args: any[]) { console.log(`[${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}] - `, ...args) };
 
-for (const file of readdirSync(`${__dirname}/commands`).filter(file => file.endsWith(".ts"))) {
-    const command: AZCommand = require(`${__dirname}/commands/${file}`)
-    commands.set(command.data.name, command);
-    cmdlists.push(command.data.toJSON());
+for (const directory of directories) {
+    for (const file of readdirSync(`${__dirname}/${directory.dir}`).filter(file => file.endsWith(".ts"))) {
+        const instance = require(`${__dirname}/${directory.dir}/${file}`);
+
+        directory.set.set(instance.data.name, instance);
+        cmdlists.push(instance.data.toJSON());
+    }
 }
 
 for (const file of readdirSync(`${__dirname}/buttons`).filter(file => file.endsWith(".ts"))) {
@@ -63,5 +71,5 @@ for (const file of readdirSync(`${__dirname}/events`).filter(file => file.endsWi
     client.application.commands.set(cmdlists);
 })();
 
-export { buttons, client, commands, config, db, events, log };
+export { buttons, client, commands, config, db, events, log, menus };
 
