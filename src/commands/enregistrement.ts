@@ -8,8 +8,8 @@ module.exports = <AZCommand>{
         .setName("enregistrement")
         .setDescription("S'enregistrer en tant que membre du gang")
         .addStringOption(option => option
-            .setName("pseudo")
-            .setDescription("Votre pseudo dans le gang")
+            .setName("surnom")
+            .setDescription("Votre surnom dans le gang")
             .setRequired(true)
         )
         .addStringOption(option => option
@@ -27,7 +27,7 @@ module.exports = <AZCommand>{
 
         const member = await db.manager.findOne(Member, { where: { id: interaction.user.id } }) ?? new Member();
         member.id = interaction.user.id;
-        member.name = interaction.options.getString("pseudo", true);
+        member.name = interaction.options.getString("surnom", true);
         member.phone = interaction.options.getString("numero", true);
         member.idCard = interaction.options.getAttachment("carte-identite", false)?.url;
 
