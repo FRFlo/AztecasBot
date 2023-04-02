@@ -36,7 +36,7 @@ module.exports = <AZCommand>{
         const guildMember = await interaction.guild.members.fetch(interaction.user.id);
 
         if (![...config.grades, ...config.membres].includes(guildMember.roles.highest.id)) {
-            await guildMember.roles.add(config.membres[-1]);
+            await guildMember.roles.add(config.membres[config.membres.length - 1]);
         }
 
         await interaction.editReply("Vous êtes désormais enregistré en tant que membre du gang");
